@@ -1,0 +1,166 @@
+ app.put("/resetpassword/:token",(req,res)=>{
+    console.log(t)
+    console.log(req.params.token)
+     if(t === req.params.token){
+        User.findOneAndUpdate({email:req.body.email},{password:req.body.password},(err,found)=>{
+            if(!err){
+                if(found){
+                    bcrypt.hash(req.body.password,saltRounds,(err2,hash)=>{
+                        if(!err2){
+                            found.password = hash
+                            found.save()
+                            // console.log(found.password)
+                        }
+                    })
+                }else{
+                    res.status(400).send("User with this email doesnt exists")
+                }
+            }
+        })
+     }else{
+        res.status(400).send("Invalid Token")
+     }
+
+ })
+
+
+ let t;
+ app.post("/forgetpassword",(req,res)=>{
+     User.findOne({email:req.body.email},(err,found)=>{
+         e = req.body.email
+
+         if(!err){
+             if(found){
+               let token = jwt.sign({_id:found._id},"makeyourtrip",{expiresIn:'10m'})
+               t=token
+               console.log(t)
+               const output = `
+               <h3>Dont Worry if you forgot your password</h3>
+               
+               <a href='http://localhost:3000/resetpassword/${token}'>Click here to reset your password</a>
+             `;
+               sendMail(found.name,found.email,output)
+             }
+             else{
+                 res.status(400).send("Invalid Email")
+             }
+         }
+     })
+ })
+
+
+
+
+ //version 2
+  app.put("/resetpassword/:token",(req,res)=>{
+User.findOneAndUpdate({resetLink:req.params.token},{password:req.body.password},(err,found)=>{
+    if(!err){
+        if(found){
+            bcrypt.hash(req.body.password,saltRounds,(err2,hash)=>{
+                if(!err2){
+                    found.password = hash
+                    found.save()
+                    console.log(found.password)
+                }
+            })
+        }else{
+            res.status(400).send("User with this email doesnt exists")
+        }
+    }
+})
+ })
+
+
+  app.post("/forgetpassword",(req,res)=>{
+     User.findOne({email:req.body.email},(err,found)=>{
+         e = req.body.email
+
+         if(!err){
+             if(found){
+               let token = jwt.sign({_id:found._id},"makeyourtrip",{expiresIn:'10m'})
+               found.resetLink = token
+               found.save()
+               console.log(found.resetLink)
+               const output = `
+               <h3>Dont Worry if you forgot your password</h3>
+               
+               <a href='http://localhost:3000/resetpassword/${token}'>Click here to reset your password</a>
+             `;
+               sendMail(found.name,found.email,output)
+             }
+             else{
+                 res.status(400).send("Invalid Email")
+             }
+         }
+     })
+ })
+
+
+ // the part where code works
+ app.post("/forgetpassword",(req,res)=>{
+     User.findOne({email:req.body.email},(err,found)=>{
+         e = req.body.email
+
+         if(!err){
+             if(found){
+               let token = jwt.sign({_id:found._id},"makeyourtrip",{expiresIn:'10m'})
+               const output = `
+               <h3>Dont Worry if you forgot your password</h3>
+               
+               <a href='http://localhost:3000/resetpassword/${token}'>Click here to reset your password</a>
+             `;
+               sendMail(found.name,found.email,output)
+             }
+             else{
+                 res.status(400).send("Invalid Email")
+             }
+         }
+     })
+ })
+
+
+ app.put("/resetpassword/:token",(req,res)=>{
+User.findOneAndUpdate({email:req.body.email},{password:req.body.password},(err,found)=>{
+    if(!err){
+        if(found){
+            bcrypt.hash(req.body.password,saltRounds,(err2,hash)=>{
+                if(!err2){
+                    found.password = hash
+                    found.save()
+                    console.log(found.password)
+                }
+            })
+        }else{
+            res.status(400).send("User with this email doesnt exists")
+        }
+    }
+})
+ })
+
+
+
+ // s code
+ app.get("/resetpassword",(req,res)=>{
+    console.log("reset password called");
+    User.findOneAndUpdate({resetLink:req.params.token},{password: req.params.password},(err,found)=>{
+    console.log(req.params.token)
+    if(!err){
+        if(found){
+            bcrypt.hash(req.body.password,saltRounds,(err2,hash)=>{
+                if(!err2){
+                    found.password = hash
+                    found.save()
+                    console.log(found.password)
+                }
+            })
+        }else{
+            res.status(400).send("User with this email doesnt exists")
+        }
+    }
+})
+ });
+
+ //react 
+      axios.get("http://localhost:5000/resetpassword/?password="+password+"&token=bdshbewiubfieurneriucnroeicn").then(data=>{
+                console.log(data)
+              }).catch(err=>{console.log(err)})
