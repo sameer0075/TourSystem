@@ -53,9 +53,9 @@ function App() {
          <ForgetPassword />
        </Route>
 
-       <Route path="/resetpassword/:token">
-        <NewPassword />
-       </Route>
+       <Route path="/resetpassword/:token" component={NewPassword} />
+      
+       
 
        <Route path="/myposts/:id">
            <MyPosts />

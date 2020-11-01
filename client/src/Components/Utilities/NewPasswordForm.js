@@ -7,7 +7,7 @@ const NewPasswordForm = (props)=>{
     let history = useHistory();
     // const [email,setEmail] = React.useState("")
     const [password,setPassword] = React.useState("")
-    let t = props.computedMatch.params.token
+    let t = props.token
     return(
         <div className="contact1">
         <h3>Change Password</h3> 

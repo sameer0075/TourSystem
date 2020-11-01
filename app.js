@@ -8,7 +8,29 @@ const joi = require("@hapi/joi");
 const _ = require("lodash");
 const cors = require("cors");
 
+// using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+// javascript
+// const sgMail = require('@sendgrid/mail')
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
+// const msg = {
+//     to: 'sameerbutt151@gmail.com', // Change to your recipient
+//     from: 'makeyourtrippakistan@gmail.com', // Change to your verified sender
+//     subject: 'Sending with SendGrid is Fun',
+//     text: 'and easy to do anywhere, even with Node.js',
+//     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+//   }
+
+//   sgMail
+//   .send(msg)
+//   .then(() => {
+//     console.log('Email sent')
+//   })
+//   .catch((error) => {
+//     console.log("msg123");
+//     console.error(error)
+//   })
 
 
 
@@ -263,7 +285,7 @@ app.put("/update/:id",auth,(req,res)=>{
       requireTLS: true,
       auth: {
           user: 'makeyourtrippakistan@gmail.com',
-          pass: 'makeyourtrip123@'
+          pass: 'sameerbutt877'
       }, tls: {
         rejectUnauthorized: false
     }
@@ -341,8 +363,7 @@ app.post("/forgetpassword",(req,res)=>{
               found.resetLink = token
               found.save()
               console.log(found.resetLink)
-             v =  reset(found.resetLink)
-             console.log(v)
+           
               const output = `
               <h3>Dont Worry if you forgot your password</h3>
               

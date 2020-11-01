@@ -2,7 +2,7 @@ import React from "react"
 import NewPasswordForm from "./NewPasswordForm"
 
 
-const NewPassword = ()=>{
+const NewPassword = (props)=>{
     return(
         <div className="loginContainer">
         <h1 className="brand"><span>Make</span> Your Trip</h1>
@@ -15,7 +15,7 @@ const NewPassword = ()=>{
               <li><i className="fa fa-envelope"></i> test@acme.test</li>
             </ul>
           </div>
-           <NewPasswordForm />
+           <NewPasswordForm token={props.match.params.token}/>
         </div>
       </div> 
     )
