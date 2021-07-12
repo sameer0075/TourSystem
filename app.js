@@ -46,8 +46,8 @@ app.use(express.static(__dirname + '/public'));
  
 
 
-  mongoose.connect("mongodb://localhost:27017/postDB", 
-  {useNewUrlParser: true,useUnifiedTopology:true,useFindAndModify:false});
+mongoose.connect("mongodb+srv://sameer:sameerbutt877@cluster0.hmsud.mongodb.net/postDB?retryWrites=true&w=majority", 
+{useNewUrlParser: true,useUnifiedTopology:true,useFindAndModify:false});
 
   /////////////////////////////////////    Post Related Routes and Schemas's   //////////////////////////////////
   const postSchema =  new mongoose.Schema({ 
@@ -515,7 +515,7 @@ app.post("/",(req,res)=>{
 })
 
 
-app.listen(5000,()=>{
+app.listen(4000,()=>{
     console.log("Server is running at port 5000");
 })
 
